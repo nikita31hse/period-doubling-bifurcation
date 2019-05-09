@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.widgets import Slider
 
-
 class Point:
     X = 0
     Y = 0
@@ -13,17 +12,14 @@ class Point:
         self.Y = _y
         self.IsOnCurve = isoncurve
 
-
 def arange(start, finish, d):
     while start <= finish:
         yield start
         start += d
 
-
 def F(x):
     global mu
     return 4 * mu * x * (1 - x)
-
 
 DRAWING_POINT = 8
 f_in = open("data.txt", "r")
@@ -31,15 +27,12 @@ start_x, mu = map(float, f_in.readline().split())
 
 fig, ax = plt.subplots(figsize=(10, 6))
 fig.subplots_adjust(left=0.05, right=0.8)
-##ax.set_facecolor('#eafff5')
 line, = ax.plot([], [], lw=2, color="#FF0000", label="line")
 ax.set_ylim(0, 1)
 ax.set_xlim(0, 1)
 point_path = []
-##ax.plot(xdata, ydata, color='#000000')
 text = fig.text(0.82, 0.6, 'Try this values:\n  $\mu_1$=0.5\n  $\mu_2$=0.8\n  $\mu_3$=0.87\n  $\mu_4$=0.89\n  $\mu_5$=0.8915\n  $\mu_6$=0.95', size=14)
 text = fig.text(0.25, 0.9, 'Period doubling bifurcation', size=20)
-
 
 xarr = list(arange(0, 1.01, 0.01))
 yarr = []
@@ -53,7 +46,6 @@ frame = 0
 
 for i in range(Length):
     path.extend([Point(path[-1].X, F(path[-1].X), True), Point(F(path[-1].X), F(path[-1].X))])
-
 
 def run(data):
     global frame, point_path
@@ -80,7 +72,6 @@ def run(data):
 
     frame += 1
     return line,
-
 
 def update(val):
     global current_animation
